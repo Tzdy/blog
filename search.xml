@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>技术栈</title>
+    <url>/blog/2020/05/01/technologyStack/index/</url>
+    <content><![CDATA[<p>日常开发解决方案。</p>
+<a id="more"></a>
+
+<blockquote>
+<p>(版本号为我目前使用的版本，不是最新版本)。</p>
+</blockquote>
+<h2 id="前端开发项目模板"><a href="#前端开发项目模板" class="headerlink" title="前端开发项目模板"></a>前端开发项目模板</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+<th>仓库</th>
+<th>作者源仓库</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vue-admin</td>
+<td>后台管理模板</td>
+<td><a href="https://www.tsdy.club/git/anqi00000001/vue-admin-template">vue-admin</a></td>
+<td><a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" rel="noopener">vue-elememt-admin</a></td>
+</tr>
+</tbody></table>
+<h2 id="后端开发项目模板"><a href="#后端开发项目模板" class="headerlink" title="后端开发项目模板"></a>后端开发项目模板</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+<th>仓库</th>
+<th>作者源仓库</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>express-auth</td>
+<td>用户登陆注册获取个人信息模板</td>
+<td><a href="https://www.tsdy.club/git/anqi00000001/express-auth">express-auth</a></td>
+<td>同上</td>
+</tr>
+</tbody></table>
+]]></content>
+  </entry>
+  <entry>
+    <title>PixijsVue开发过程</title>
+    <url>/blog/2020/09/14/developExp/development_2/</url>
+    <content><![CDATA[<h2 id="使用条件语句，要注意if中值的类型"><a href="#使用条件语句，要注意if中值的类型" class="headerlink" title="使用条件语句，要注意if中值的类型"></a>使用条件语句，要注意if中值的类型</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var array = [0, 1, 2, undefined, null, NaN, &#123;&#125;, []];</span><br><span class="line">array.forEach(item =&gt; &#123;</span><br><span class="line">    if (item) &#123;</span><br><span class="line">        console.log(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>希望item为数字时输出，有时候会忽略0相当于false。所以应该将判断语句修改为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if (Number.isInteger(item))</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <tags>
+        <tag>前端开发经历</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记录一下后台管理中的侧边栏</title>
+    <url>/blog/2020/08/02/vue/%E4%BE%A7%E8%BE%B9%E6%A0%8F/</url>
+    <content><![CDATA[<p>在后台管理中侧边栏就是一个递归组件</p>
+<a id="more"></a>
+<img src="/blog/image/vue/sidebar.gif" class="" title="title text" alt="alt text">
+<p>在制作前，首先要明确需要哪些功能。</p>
+<ol>
+<li>根据vue-router的routes的配置来生成对应的侧边栏</li>
+<li>根据vue-router中每个route的name（也可以是path）来动态展开侧边栏</li>
+<li>侧边栏的展开闭合过渡动画</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>vue</tag>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>给网站添加ssl证书</title>
+    <url>/blog/2020/04/14/https/%E7%BB%99%E7%BD%91%E7%AB%99%E6%B7%BB%E5%8A%A0ssl%E8%AF%81%E4%B9%A6/</url>
+    <content><![CDATA[<blockquote>
+<p>必须有已经完成备案的域名，和ssl证书</p>
+</blockquote>
+<p>使用的环境为</p>
+<ul>
+<li>Apache “^2.4.29” (Ubuntu)</li>
+<li>Ubuntu “^18.04.2”</li>
+<li>ECS实例 (阿里云学生机)<a id="more"></a>
+
+</li>
+</ul>
+<p>首先在阿里云官网上根据自己的要求下载ssl证书</p>
+<blockquote>
+<p>我们这里下载apache的</p>
+</blockquote>
+<hr>
+<p>接下来将ssl证书上传到服务器的/etc/ssl/certs/文件中。</p>
+<blockquote>
+<p>也可以不放在/etc/ssl/certs/中，但是要记住路径。</p>
+</blockquote>
+<hr>
+<h2 id="导入ssl模块"><a href="#导入ssl模块" class="headerlink" title="导入ssl模块"></a>导入ssl模块</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 建立软连接，相当于导入模块</span><br><span class="line">ln -s /etc/apache2/mods-available/ssl.load /etc/apache2/mods-enable/ssl.load </span><br><span class="line">ln -s /etc/apache2/mods-available/ssl.conf /etc/apache2/mods-enable/ssl.conf </span><br><span class="line">service apache2 reload</span><br></pre></td></tr></table></figure>
+<p>也可以</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo a2enmod ssl</span><br><span class="line">service apache2 reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置https"><a href="#配置https" class="headerlink" title="配置https"></a>配置https</h2><p>打开/etc/apache2/sites-available可以看到default-ssl.conf如果没有可以自建。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># /etc/apache2/sites-available/default-ssl.conf</span><br><span class="line">&lt;IfModule mod_ssl.c&gt;</span><br><span class="line">	&lt;VirtualHost _default_:443&gt;</span><br><span class="line">		ServerAdmin 你的邮箱</span><br><span class="line">        DocumentRoot /var/www/你的目录</span><br><span class="line">	    ServerName 你的域名</span><br><span class="line"></span><br><span class="line">		ErrorLog $&#123;APACHE_LOG_DIR&#125;/error.log</span><br><span class="line">		CustomLog $&#123;APACHE_LOG_DIR&#125;/access.log combined</span><br><span class="line"></span><br><span class="line">        SSLEngine on </span><br><span class="line"></span><br><span class="line">        # 这里是ssl证书中的三个文件的地址（填你自己的）</span><br><span class="line">        SSLCertificateFile /etc/ssl/certs/www.tsdy.club_public.crt</span><br><span class="line">        SSLCertificateKeyFile /etc/ssl/certs/www.tsdy.club.key</span><br><span class="line">        SSLCertificateChainFile /etc/ssl/certs/www.tsdy.club_chain.crt</span><br><span class="line"></span><br><span class="line">        &lt;FilesMatch &quot;\.(cgi|shtml|phtml|php)$&quot;&gt;</span><br><span class="line">                        SSLOptions +StdEnvVars</span><br><span class="line">        &lt;/FilesMatch&gt;</span><br><span class="line">        &lt;Directory /usr/lib/cgi-bin&gt;</span><br><span class="line">                        SSLOptions +StdEnvVars</span><br><span class="line">        &lt;/Directory&gt;</span><br><span class="line">    &lt;/VirtualHost&gt;</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+<p>并将该文件软连接至/etc/apache2/sites-enable/default-ssl.conf。</p>
+<p>最后运行 service apache2 reload就可以访问了，但是当我们用域名访问时，还是会默认使用http://域名，的方式访问。所以当访问http:域名时，要重定向至https://域名。</p>
+<h2 id="配置重定向"><a href="#配置重定向" class="headerlink" title="配置重定向"></a>配置重定向</h2><p>在/etc/apache2/sites-available/中找到配置文件。可能是httpd.conf也可能是其它名字（我的是sitename.conf）。</p>
+<blockquote>
+<p>其实吧写在哪里都可以，只要软连接至/etc/apache2/sites-available/中就可以</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 当你通过域名访问80端口时，就会重定向至https的443端口</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">        ServerName 你的域名</span><br><span class="line">        RewriteEngine on</span><br><span class="line">        RewriteCond   %&#123;HTTPS&#125; !=on</span><br><span class="line">        RewriteRule   ^(.*)  https://%&#123;SERVER_NAME&#125;$1 [L,R]</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>apache2</tag>
+        <tag>https</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记一次后台管理项目开发</title>
+    <url>/blog/2020/03/09/developExp/development_1/</url>
+    <content><![CDATA[<p>这是一个学校社团布置的官网后台管理项目，主要包含了登陆，登陆状态持久化，用户权限，以及一些增删改查的功能。</p>
+<a id="more"></a>
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a><a href="#技术栈">技术栈</a></h2><ul>
+<li>vue-admin后台管理框架</li>
+<li>spring-boot （后台不在我的处理范围）</li>
+</ul>
+<h2 id="开发过程"><a href="#开发过程" class="headerlink" title="开发过程"></a><a href="#开发过程">开发过程</a></h2><p>&nbsp;&nbsp;这是我学习前端以来，第一次完整的合作开发一个项目，因此我并不是很明白一个项目的开发过程，导致我在刚接到这个项目的时候就不是很在意，认为就和平时自己练手一样，只要根据后台api文档，写mock数据，最后把项目调试通就好。最后我并没有和后端开发者讨论开发前的注意事项，只是草草讨论了些自己学过的东西，就回去开工了。<br>&nbsp;&nbsp;我第一步是去找一个合适的框架，由于我学过一些vue，所以就偏向于vue有关的框架，最后选中了vue-admin。其实当时我还是挺着急的，因为布置任务的时候，学长说：“这个项目非常简单，他一下午就能搞定，但看在你们没有经验就给两个星期。”我没有写过后台管理，所以很担心两个星期完不成。<br>&nbsp;&nbsp;在开发的过程中，我一边学习vue-admin，element-ui一边紧锣密鼓的根据后端陆续提供的api文档写着代码。我该庆幸有vue-admin和element-ui帮我解决了绝大部分的布局，样式问题。使我只需要处理单页面，以及数据的处理问题。但是即便如此，我也有些力不从心，因为我学习vue没有多久，基本属于纸上谈兵阶段，我可以很轻松的使用vue的一些基础的功能，但这些在开发后台管理页面时是不够的。可以这样理解，当你在盖楼房时，你不但看不懂设计图纸，而且不会用盖楼的工具，这真是一个悲伤的故事。当我草草学会一些vue-admin，element-ui的基本操作时，便开始着手实现第一组api用户管理。在实现获取用户列表时，并没有遇到太大的困难，基本上查查文档就能很快完成，但还是遇到了俩个小问题。<strong>其一就是鼠标悬浮在用户上显示用户操作这个功能</strong>，由于使用element-ui不太熟悉，所以摸索了好久才通过element-ui中表格自带的事件和dom操作，才完成了这个效果（其实我不太满意这个效果，因为我不想让表格高度随这个效果变大变小，但是当时比较着急就没有在深纠了，以后有时间应该会返回来看看。）</p>
+<img src="/blog/image/developExp/development_1.gif" class="">
+<p><strong>其二就是单页面显示这个功能</strong>，由于这个项目是单页面展示用户列表，所以要保证用户可以翻页，并且用户还可以通过url跳转到之前保存的那一页，比如说用户访问<code>http://localhost:8000?page=3&amp;pageSize=2</code>时可以直接获取第三页的数据。这一块我花了很多时间，直到入门了vue-router后，才使用路由守卫和vue的钩子函数完成了这个功能。<br>&nbsp;&nbsp;在写完获取用户列表后，我遇到了第一个大困难，在我获取用户列表中的编辑操作，会切换的另一个页面，显示用户的详细信息，并且可以编辑用户信息。刚开始我的想法是写一个组件作为获取用户列表的子组件，通过props向子组件传递表格中的行信息，再通过子组件访问父组件的数据来编辑用户信息。但我觉得这样写出来的代码不太舒服，因为我觉得编辑页面应该是和用户列表同级的独立页面。直到我发现vue-router在跳转时可以携带参数向下一个页面传递信息，我决定使用vue-admin新建一个名为editUser的侧边栏，并且将hidden设置为true，是用户看不到这个侧边栏，当调用<code>this.$router.push({ name: &#39;editUser&#39;, params: { ...scope.row }})</code>时想用户编辑页面跳转并携带行内信息。然后在editUser这个页面中完成用户信息的编辑。<br>&nbsp;&nbsp;剩下的就基本是套用用户管理的模式。</p>
+<h2 id="前后端联调"><a href="#前后端联调" class="headerlink" title="前后端联调"></a><a href="#前后端联调">前后端联调</a></h2><p>&nbsp;&nbsp;前端页面匆匆完成了，基本上可以用惨不忍睹来形容，正好赶上了放寒假，于是就决定回学校在对接。不凑巧的是赶上了疫情期间延迟开学，因此我的第一次项目对接只能在网上进行了。由于是第一次，没有什么经验，没有了解过反向代理这个功能，我甚至连后端的接口都调用不了，为了解决这个问题我重新学习了一遍axios，并且配合express调试了很久终于了解了跨域问题的一种解决方式。<br>&nbsp;&nbsp;express毕竟不是spring，没有学过spring的我基本上和后端同学无法沟通，有种隔行如隔山的感觉。俗话说：“后端转前端就是捅破一层窗户纸，前端转后端，就不容易了。”我们商量了好几天，都没有成果，于是调试任务就这样搁置了好几天。最后还是一个学长告诉我们，部署前端项目不需要动后端代码，用反向代理就可以解决跨域问题。<br>&nbsp;&nbsp;当我可以调用第一个接口时，我真的感觉松了口气，同时有点兴奋，尽管后端返回了 no message的错误。纠结了很久为啥后端接受不到我的数据，最后发现是axios传输方式<a href="/blog/2020/02/27/axios/axios%E4%B9%8Bparams%E4%B8%8Edata/" title="params与data">params与data</a>的问题。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><a href="#总结">总结</a></h2><p>这次后台管理项目的开发，虽然过程有些艰辛，但是我能感觉到我收获了很多东西。</p>
+<h3 id="1-开发前"><a href="#1-开发前" class="headerlink" title="1. 开发前"></a>1. 开发前</h3><ul>
+<li>前端后端人员应该更详细的沟通项目</li>
+<li>双方要交流对这个项目的看法，以及自己计划的实现方式。</li>
+<li>双方要沟通好api文档的命名方式，不要随意命名，随意给出莫名其妙的数据结构。</li>
+<li>api文档中应该给出每个数据的具体要求，具体类型。</li>
+<li>双方沟通好数据传输的方式。</li>
+</ul>
+<h3 id="2-开发时"><a href="#2-开发时" class="headerlink" title="2. 开发时"></a>2. 开发时</h3><ul>
+<li>双方如果对api文档进行修改时，必须提醒对方。（尽量别修改，开发前想好）</li>
+<li>必须精确的按照文档开发（认真对照），不要出现文档上是list自己写成lists这种下意识的错误。</li>
+</ul>
+<h3 id="3-联调时"><a href="#3-联调时" class="headerlink" title="3. 联调时"></a>3. 联调时</h3><p><strong>如果上述这些基本条件都满足了，那么恭喜，联调的时候不至于会那么崩溃。</strong>（亲身体验，同时面对api文档的细微错误，传输方式的问题，自己代码的一些逻辑问题，同样的问题不同的数据结构，不同命名，以及一些后端的逻辑问题……你会很绝望的）。</p>
+]]></content>
+      <tags>
+        <tag>前端开发经历</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我眼中的c</title>
+    <url>/blog/2020/03/02/viewpoint/%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84c/</url>
+    <content><![CDATA[<p>我相信每一个对编程感兴趣的大学生，第一次接触c和c++时都会陷入一种“莫名其妙”的热情，认为自己可以掌握它，甚至想精通它，并通过它在未来谋取份好工作。</p>
+<a id="more"></a>
+<img src="/blog/image/viewpoint/cat.png" class="">
+<p>&nbsp;&nbsp;我记得大一的时候，老师的教学方式是以用c刷题为主，数学方面比较慢的我，在很多时候都转不过弯，经常一道题做几个小时。不过意外的是，我并没有很快失去兴趣。反而学的有些亢奋。其实我觉的这样入门编程是挺好的。</p>
+<ol>
+<li>因为c是一种强类型语言，在入门时会增强程序员对代码的严谨性。</li>
+<li>由于一些基础的算法题只涉及栈操作，所以使用起来并不会太困难</li>
+<li>c是面向过程编程的语言，不会增加面向对象，对学生的困扰。  </li>
+</ol>
+<p>当时我记得老师说，学完c就应该接着学数据结构。现在想想，我应该是误解了老师话中的“学完”两个字。于是我在半吊子c的情况下，强行学数据结构。于是我就进入了大学以来的第一个学习误区。<br>&nbsp;&nbsp;由于对指针的不熟悉，学习数据结构成了噩梦。简单的线性表，队列，栈其实都很好理解，但是当使用c来实现时。就出现了很尴尬的现象。</p>
+<blockquote>
+<p>100%（学习链表的总时间） = 5%（学习链表的知识点）+ 95%（改bug）  </p>
+</blockquote>
+<p>其实看到这里就会发现，当我学习数据结构时，基本都是在改bug，不但数据结构没有学好，还浪费了大量的时间。<strong>所以我并不是很推荐使用c来学习数据结构，除非你真的熟悉c。</strong></p>
+<p>&nbsp;&nbsp;我相信大部分学生在后期，以及后续的工作中主要还是会使用一些有垃圾回收机制的语言，比如java，js等，可以说，这些学生在大一学习的c以后，可能再也不会接触c了，那么大一花费那么多时间学习c，基本上可以说是白学了。这时候有人可能会说：“技多不压身啊，多学习一些肯定有好处的”。这句话是没有问题的，但是想要得到这项技能的好处，前提是你得先把它变成自己的技能（就是真正学会它）。</p>
+<p>&nbsp;&nbsp;c语言在内存管理上和引用型语言是有很大区别的，你不但要完成代码的逻辑，还需要花费时间处理回收内存。我没有学过java不太清楚java的内存回收机制，但是我清楚我在学习与使用js时，当初在c内存上死去活来的经历，并不能给我提供更多的帮助。</p>
+<blockquote>
+<p>“学会C语言后，再学习其它语言就会比较轻松。”是有道理的，但是这个轻松只是体现在可以更快的入门，因为每种语言都有不同的特性，当你去深入学习时，C语言的底子就不太明显了。真正能使学习其它语言变得轻松的应该是编程思想，与逻辑思维能力。</p>
+</blockquote>
+<p>最后我想说，我并不是为了贬低C语言去吐槽C语言。而是站在一个学过C语言的“过来人”角度上所做的分析。</p>
+]]></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gogs通过Apache2进行反向代理</title>
+    <url>/blog/2020/02/29/gogs/gogs%E9%80%9A%E8%BF%87apache2%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<p>通常情况下，gogs会被部署在某一个端口上，在访问时需要通过该端口访问。如果一个服务器上部署多个应用，则需要开放多个端口，这样不但看起来不美观，而且使用起来也不方便。所以我想通过反向代理，使用户在80端口无感知的访问部署在其他端口的应用。</p>
+<a id="more"></a>
+<h2 id="实验工具"><a href="#实验工具" class="headerlink" title="实验工具"></a><a href="#实验工具">实验工具</a></h2><ul>
+<li>gogs “^0.11.91”</li>
+<li>Apache “^2.4.29” (Ubuntu)</li>
+<li>Ubuntu “^18.04.2”</li>
+<li>ECS实例 (阿里云学生机)</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a><a href="#配置">配置</a></h2><h3 id=""><a href="#" class="headerlink" title=""></a><a href="/blog/2020/02/29/Apache2/Apache2%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" title="apache2配置（点击跳转）">apache2配置（点击跳转）</a></h3><h3 id="gogs配置"><a href="#gogs配置" class="headerlink" title="gogs配置"></a>gogs配置</h3><p>打开gogs/custom/conf/app.ini，在[server]下修改或添加</p>
+<figure class="highlight plain"><figcaption><span>app.ini</span></figcaption><table><tr><td class="code"><pre><span class="line">ROOT_URL = http://外网ip/在apache2中设置的代理地址</span><br><span class="line">SSH_DOMAIN = 外网ip</span><br></pre></td></tr></table></figure>
+<p><strong>注！</strong>这两个属性是影响这里的</p>
+<img src="/blog/image/gogs/gogs%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE.png" class="">
+
+<h3 id="配置完毕"><a href="#配置完毕" class="headerlink" title="配置完毕"></a>配置完毕</h3><p>重启gogs后，就算配置完毕了。</p>
+<figure class="highlight plain"><figcaption><span>shell</span></figcaption><table><tr><td class="code"><pre><span class="line">service gogs restart</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>apache2</tag>
+        <tag>gogs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Apache2反向代理</title>
+    <url>/blog/2020/02/29/Apache2/Apache2%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<h2 id="实验工具"><a href="#实验工具" class="headerlink" title="实验工具"></a><a href="#实验工具">实验工具</a></h2><ul>
+<li>Apache “^2.4.29” (Ubuntu)</li>
+<li>Ubuntu “^18.04.2”</li>
+<li>ECS实例 (阿里云学生机)<a id="more"></a>
+
+</li>
+</ul>
+<h2 id="Apache2文件结构"><a href="#Apache2文件结构" class="headerlink" title="Apache2文件结构"></a><a href="#Apache2文件结构">Apache2文件结构</a></h2><p>/etc/apache2<br>├── apache2.conf<br>├── conf-available<br>├── conf-enabled<br>├── envvars<br>├── magic<br>├── mods-available<br>├── mods-enabled<br>├── ports.conf<br>├── sites-available<br>└── sites-enabled</p>
+<h2 id="Apache2配置"><a href="#Apache2配置" class="headerlink" title="Apache2配置"></a><a href="#Apache2配置">Apache2配置</a></h2><h3 id="引入proxy与proxy-http模块"><a href="#引入proxy与proxy-http模块" class="headerlink" title="引入proxy与proxy_http模块"></a>引入proxy与proxy_http模块</h3><p>通过apache2.conf中（如下代码），我们可以知道，apache2的模块与模块配置是从mods-enabled中导入的。</p>
+<figure class="highlight plain"><figcaption><span>apache2.conf</span></figcaption><table><tr><td class="code"><pre><span class="line">#Include module configuration:</span><br><span class="line">IncludeOptional mods-enabled/*.load </span><br><span class="line">IncludeOptional mods-enabled/*.conf</span><br></pre></td></tr></table></figure>
+
+<p>Apache2在安装后，不但有一些已经导入的模块，还附带了一些扩展模块在mods-available中，其中就有我们需要的proxy与proxy_http模块。使用ll命令我们不难发现mods-enabled中的模块是与mods-available中模块的一个连接，所以我们也按照这种默认的方式将模块引入。</p>
+<figure class="highlight plain"><figcaption><span>shell</span></figcaption><table><tr><td class="code"><pre><span class="line">ln -s /etc/apache2/mods-available/proxy.load /etc/apache2/mods-enabled/proxy.load</span><br><span class="line">ln -s /etc/apache2/mods-available/proxy.conf /etc/apache2/mods-enabled/proxy.conf</span><br><span class="line">ln -s /etc/apache2/mods-available/proxy_http.load /etc/apache2/mods-enabled/proxy_http.load</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-etc-apache2-site-available"><a href="#配置-etc-apache2-site-available" class="headerlink" title="配置/etc/apache2/site-available"></a>配置/etc/apache2/site-available</h3><p>引入模块后就开始正式配置/etc/apache2/site-available/sitename.conf(这是自定义的，根据自己的文件来)。</p>
+<figure class="highlight plain"><figcaption><span>sitename.conf</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerName local  (自定义)</span><br><span class="line">    ServerAlias otherdn.com (自定义)</span><br><span class="line">    ServerAdmin tuweizhong@163.com (自定义)</span><br><span class="line">    ProxyPass /goal http://localhost:3000 (这里是使用/goal来代理http://localhost:3000)</span><br><span class="line">    ProxyPassReverse /goal http://localhost:3000 (作用参考文档，写法与ProxyPass相同就行)</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置完毕"><a href="#配置完毕" class="headerlink" title="配置完毕"></a>配置完毕</h3><p>重启apache2后，就算配置完毕了。</p>
+<figure class="highlight plain"><figcaption><span>shell</span></figcaption><table><tr><td class="code"><pre><span class="line">service apache2 restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a><a href="#效果展示">效果展示</a></h2><p>在配置中们我们是使用/goal来代理localhost:3000就相当于当你访问该服务器的http://外网ip/goal时，就相当于访问了该服务器中在localhost:3000上部署的服务。</p>
+]]></content>
+      <tags>
+        <tag>apache2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>axios之params与data</title>
+    <url>/blog/2020/02/27/axios/axios%E4%B9%8Bparams%E4%B8%8Edata/</url>
+    <content><![CDATA[<p>axios是一个很好用的ajax库，让你在对底层基本无感知的情况下，几行代码就可以完成原生js很多行的功能。但是在选择这个框架前，我还是建议你先尝试下axios中的每个api的具体效果，不要因为简单而忽视这些小问题。</p>
+<a id="more"></a>
+<p><strong><em>注意,该篇所有代码都在async函数中执行</em></strong></p>
+<figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="code"><pre><span class="line">import axios from &apos;axios&apos;;</span><br><span class="line">async function() &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="实验工具"><a href="#实验工具" class="headerlink" title="实验工具"></a><a href="#实验工具">实验工具</a></h2><ul>
+<li>webpack “^4.35.3”</li>
+<li>webpack-cli “^3.3.11”</li>
+<li>express “^4.17.1”</li>
+<li>axios “^0.19.2”</li>
+</ul>
+<h2 id="params与data"><a href="#params与data" class="headerlink" title="params与data"></a><a href="#params与data">params与data</a></h2><p>刚开时，学习ajax框架的时候，可能对params和data存疑，因为这两个在框架中post的<strong>写法</strong>一模一样。</p>
+<figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="code"><pre><span class="line">// params</span><br><span class="line">await axios(&#123;</span><br><span class="line">    url: &apos;...&apos;,</span><br><span class="line">    methods: &apos;post&apos;,</span><br><span class="line">    params: &#123;</span><br><span class="line">        fun: &apos;params&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">// data</span><br><span class="line">await axios(&#123;</span><br><span class="line">    url: &apos;...&apos;,</span><br><span class="line">    methods: &apos;post&apos;,</span><br><span class="line">    data: &#123;</span><br><span class="line">        fun: &apos;data&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="传输方式"><a href="#传输方式" class="headerlink" title="传输方式"></a>传输方式</h3><p>但是它们两个的<strong>传输方式</strong>却完全不同，同时后端的处理方法也不一样。因此在前后端分离开发时，尤其要注意什么数据用params什么数据用data。如果你是在使用express，并且前端axios没有设置默认Content-type,那么你可以在一次post请求中都用上也不会冲突。(其他的我不晓得)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// params传输方式</span><br><span class="line">http:://yoursite.com/post?fun=params</span><br><span class="line"></span><br><span class="line">// data传输方式</span><br><span class="line">&#123;</span><br><span class="line">    &quot;fun&quot;: &quot;data&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Content-type"><a href="#Content-type" class="headerlink" title="Content-type"></a>Content-type</h3><p>虽然说前端使用axios时，并不用过分在意Content-type的设置，但是为了严谨起见，还是应该把axios处理Content-type的细节搞清楚。</p>
+<h4 id="默认的Content-type"><a href="#默认的Content-type" class="headerlink" title="默认的Content-type"></a>默认的Content-type</h4><p>在使用axios之前，往往要对axios做一些初始化配置，此时们要注意，<strong>如果你在初始化时对Content-type请求头进行设置，那么axios在后续的所有请求中，都会默认使用这个请求头(当然这个默认的优先级是在具体请求时的配置之下的)。于此同时，axios将不会根据你的数据传输方式而自动修改Content-type</strong>.</p>
+<ol>
+<li>在没有自定义Content-type，当你使用params方式传输数据时，axios将不会携带Content-type头</li>
+<li>在没有自定义Content-type，当你使用data方式传输数据时，axios会自动携带Content-type: “application/json”;</li>
+</ol>
+<h3 id="express后端的简单处理方式"><a href="#express后端的简单处理方式" class="headerlink" title="express后端的简单处理方式"></a>express后端的简单处理方式</h3><p>这里我简单的用express演示下处理方式。</p>
+<figure class="highlight plain"><figcaption><span>NodeJs</span></figcaption><table><tr><td class="code"><pre><span class="line">var app = express();</span><br><span class="line">// express处理json时要使用中间件</span><br><span class="line">var json = require(&apos;body-parser&apos;).json;</span><br><span class="line">// 处理params</span><br><span class="line">app.post(&apos;/post&apos;, function(req, res) &#123;</span><br><span class="line">    let params = req.query;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 处理data</span><br><span class="line">app.post(&apos;/post&apos;, json(), function(req, res) &#123;</span><br><span class="line">    let data = req.body;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>axios</tag>
+      </tags>
+  </entry>
+</search>
