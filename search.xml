@@ -46,11 +46,10 @@
   <entry>
     <title>PixijsVue开发过程</title>
     <url>/blog/2020/09/14/developExp/development_2/</url>
-    <content><![CDATA[<h2 id="使用条件语句，要注意if中值的类型"><a href="#使用条件语句，要注意if中值的类型" class="headerlink" title="使用条件语句，要注意if中值的类型"></a>使用条件语句，要注意if中值的类型</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var array = [0, 1, 2, undefined, null, NaN, &#123;&#125;, []];</span><br><span class="line">array.forEach(item =&gt; &#123;</span><br><span class="line">    if (item) &#123;</span><br><span class="line">        console.log(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h2 id="0-使用条件语句，要注意if中值的类型"><a href="#0-使用条件语句，要注意if中值的类型" class="headerlink" title="0.使用条件语句，要注意if中值的类型"></a>0.使用条件语句，要注意if中值的类型</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var array = [0, 1, 2, undefined, null, NaN, &#123;&#125;, []];</span><br><span class="line">array.forEach(item =&gt; &#123;</span><br><span class="line">    if (item) &#123;</span><br><span class="line">        console.log(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>希望item为数字时输出，有时候会忽略0相当于false。所以应该将判断语句修改为</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if (Number.isInteger(item))</span><br></pre></td></tr></table></figure>
-
-
+<h2 id="1-将一个实例对象上的方法赋值到另一个实例对象时，要注意this指向问题。"><a href="#1-将一个实例对象上的方法赋值到另一个实例对象时，要注意this指向问题。" class="headerlink" title="1.将一个实例对象上的方法赋值到另一个实例对象时，要注意this指向问题。"></a>1.将一个实例对象上的方法赋值到另一个实例对象时，要注意this指向问题。</h2><p>一定要注意，将普通（非箭头）函数push进入数组，调用时this为该数组<br><a href="https://www.tsdy.club/git/anqi00000001/develop-exp/src/master/PixijsVue/1.js">测试文件</a>  </p>
 ]]></content>
       <tags>
         <tag>前端开发经历</tag>
@@ -177,29 +176,6 @@
       </tags>
   </entry>
   <entry>
-    <title>gogs通过Apache2进行反向代理</title>
-    <url>/blog/2020/02/29/gogs/gogs%E9%80%9A%E8%BF%87apache2%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<p>通常情况下，gogs会被部署在某一个端口上，在访问时需要通过该端口访问。如果一个服务器上部署多个应用，则需要开放多个端口，这样不但看起来不美观，而且使用起来也不方便。所以我想通过反向代理，使用户在80端口无感知的访问部署在其他端口的应用。</p>
-<a id="more"></a>
-<h2 id="实验工具"><a href="#实验工具" class="headerlink" title="实验工具"></a><a href="#实验工具">实验工具</a></h2><ul>
-<li>gogs “^0.11.91”</li>
-<li>Apache “^2.4.29” (Ubuntu)</li>
-<li>Ubuntu “^18.04.2”</li>
-<li>ECS实例 (阿里云学生机)</li>
-</ul>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a><a href="#配置">配置</a></h2><h3 id=""><a href="#" class="headerlink" title=""></a><a href="/blog/2020/02/29/Apache2/Apache2%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" title="apache2配置（点击跳转）">apache2配置（点击跳转）</a></h3><h3 id="gogs配置"><a href="#gogs配置" class="headerlink" title="gogs配置"></a>gogs配置</h3><p>打开gogs/custom/conf/app.ini，在[server]下修改或添加</p>
-<figure class="highlight plain"><figcaption><span>app.ini</span></figcaption><table><tr><td class="code"><pre><span class="line">ROOT_URL = http://外网ip/在apache2中设置的代理地址</span><br><span class="line">SSH_DOMAIN = 外网ip</span><br></pre></td></tr></table></figure>
-<p><strong>注！</strong>这两个属性是影响这里的</p>
-<img src="/blog/image/gogs/gogs%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE.png" class="">
-
-<h3 id="配置完毕"><a href="#配置完毕" class="headerlink" title="配置完毕"></a>配置完毕</h3><p>重启gogs后，就算配置完毕了。</p>
-<figure class="highlight plain"><figcaption><span>shell</span></figcaption><table><tr><td class="code"><pre><span class="line">service gogs restart</span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>apache2</tag>
-        <tag>gogs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Apache2反向代理</title>
     <url>/blog/2020/02/29/Apache2/Apache2%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</url>
     <content><![CDATA[<h2 id="实验工具"><a href="#实验工具" class="headerlink" title="实验工具"></a><a href="#实验工具">实验工具</a></h2><ul>
@@ -226,6 +202,29 @@
 ]]></content>
       <tags>
         <tag>apache2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gogs通过Apache2进行反向代理</title>
+    <url>/blog/2020/02/29/gogs/gogs%E9%80%9A%E8%BF%87apache2%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<p>通常情况下，gogs会被部署在某一个端口上，在访问时需要通过该端口访问。如果一个服务器上部署多个应用，则需要开放多个端口，这样不但看起来不美观，而且使用起来也不方便。所以我想通过反向代理，使用户在80端口无感知的访问部署在其他端口的应用。</p>
+<a id="more"></a>
+<h2 id="实验工具"><a href="#实验工具" class="headerlink" title="实验工具"></a><a href="#实验工具">实验工具</a></h2><ul>
+<li>gogs “^0.11.91”</li>
+<li>Apache “^2.4.29” (Ubuntu)</li>
+<li>Ubuntu “^18.04.2”</li>
+<li>ECS实例 (阿里云学生机)</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a><a href="#配置">配置</a></h2><h3 id=""><a href="#" class="headerlink" title=""></a><a href="/blog/2020/02/29/Apache2/Apache2%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" title="apache2配置（点击跳转）">apache2配置（点击跳转）</a></h3><h3 id="gogs配置"><a href="#gogs配置" class="headerlink" title="gogs配置"></a>gogs配置</h3><p>打开gogs/custom/conf/app.ini，在[server]下修改或添加</p>
+<figure class="highlight plain"><figcaption><span>app.ini</span></figcaption><table><tr><td class="code"><pre><span class="line">ROOT_URL = http://外网ip/在apache2中设置的代理地址</span><br><span class="line">SSH_DOMAIN = 外网ip</span><br></pre></td></tr></table></figure>
+<p><strong>注！</strong>这两个属性是影响这里的</p>
+<img src="/blog/image/gogs/gogs%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE.png" class="">
+
+<h3 id="配置完毕"><a href="#配置完毕" class="headerlink" title="配置完毕"></a>配置完毕</h3><p>重启gogs后，就算配置完毕了。</p>
+<figure class="highlight plain"><figcaption><span>shell</span></figcaption><table><tr><td class="code"><pre><span class="line">service gogs restart</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>apache2</tag>
+        <tag>gogs</tag>
       </tags>
   </entry>
   <entry>

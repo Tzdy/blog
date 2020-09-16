@@ -181,11 +181,10 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="使用条件语句，要注意if中值的类型"><a href="#使用条件语句，要注意if中值的类型" class="headerlink" title="使用条件语句，要注意if中值的类型"></a>使用条件语句，要注意if中值的类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var array = [0, 1, 2, undefined, null, NaN, &#123;&#125;, []];</span><br><span class="line">array.forEach(item =&gt; &#123;</span><br><span class="line">    if (item) &#123;</span><br><span class="line">        console.log(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+  <h2 id="0-使用条件语句，要注意if中值的类型"><a href="#0-使用条件语句，要注意if中值的类型" class="headerlink" title="0.使用条件语句，要注意if中值的类型"></a>0.使用条件语句，要注意if中值的类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var array = [0, 1, 2, undefined, null, NaN, &#123;&#125;, []];</span><br><span class="line">array.forEach(item =&gt; &#123;</span><br><span class="line">    if (item) &#123;</span><br><span class="line">        console.log(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>希望item为数字时输出，有时候会忽略0相当于false。所以应该将判断语句修改为</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (Number.isInteger(item))</span><br></pre></td></tr></table></figure>
-
-
+<h2 id="1-将一个实例对象上的方法赋值到另一个实例对象时，要注意this指向问题。"><a href="#1-将一个实例对象上的方法赋值到另一个实例对象时，要注意this指向问题。" class="headerlink" title="1.将一个实例对象上的方法赋值到另一个实例对象时，要注意this指向问题。"></a>1.将一个实例对象上的方法赋值到另一个实例对象时，要注意this指向问题。</h2><p>一定要注意，将普通（非箭头）函数push进入数组，调用时this为该数组<br><a href="https://www.tsdy.club/git/anqi00000001/develop-exp/src/master/PixijsVue/1.js">测试文件</a>  </p>
  
       <!-- reward -->
       
@@ -418,57 +417,6 @@
 
     
     <article
-  id="post-gogs/gogs通过apache2进行反向代理"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/blog/2020/02/29/gogs/gogs%E9%80%9A%E8%BF%87apache2%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"
-    >gogs通过Apache2进行反向代理</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/blog/2020/02/29/gogs/gogs%E9%80%9A%E8%BF%87apache2%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" class="article-date">
-  <time datetime="2020-02-28T16:00:00.000Z" itemprop="datePublished">2020-02-29</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>通常情况下，gogs会被部署在某一个端口上，在访问时需要通过该端口访问。如果一个服务器上部署多个应用，则需要开放多个端口，这样不但看起来不美观，而且使用起来也不方便。所以我想通过反向代理，使用户在80端口无感知的访问部署在其他端口的应用。</p> 
-      <a class="article-more-link" href="/blog/2020/02/29/gogs/gogs%E9%80%9A%E8%BF%87apache2%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/apache2/" rel="tag">apache2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/gogs/" rel="tag">gogs</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-</article>
-
-    
-    <article
   id="post-Apache2/Apache2反向代理"
   class="article article-type-post"
   itemscope
@@ -513,6 +461,57 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/apache2/" rel="tag">apache2</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-gogs/gogs通过apache2进行反向代理"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/blog/2020/02/29/gogs/gogs%E9%80%9A%E8%BF%87apache2%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"
+    >gogs通过Apache2进行反向代理</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2020/02/29/gogs/gogs%E9%80%9A%E8%BF%87apache2%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" class="article-date">
+  <time datetime="2020-02-28T16:00:00.000Z" itemprop="datePublished">2020-02-29</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>通常情况下，gogs会被部署在某一个端口上，在访问时需要通过该端口访问。如果一个服务器上部署多个应用，则需要开放多个端口，这样不但看起来不美观，而且使用起来也不方便。所以我想通过反向代理，使用户在80端口无感知的访问部署在其他端口的应用。</p> 
+      <a class="article-more-link" href="/blog/2020/02/29/gogs/gogs%E9%80%9A%E8%BF%87apache2%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/apache2/" rel="tag">apache2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/gogs/" rel="tag">gogs</a></li></ul>
 
     </footer>
   </div>
